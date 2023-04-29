@@ -1,4 +1,4 @@
-package com.uca.laboratorio5
+package com.uca.laboratorio5.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.uca.laboratorio5.R;
 
 // TODO: Rename parameter arguments, choose names that match
 

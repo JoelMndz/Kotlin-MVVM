@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".newMovieFragment"
+    tools:context=".ui.newMovieFragment"
     android:background="@color/backgroundLayout">
 
     <!-- TODO: Update blank fragment layout -->
@@ -33,9 +33,10 @@
             android:layout_marginTop="40dp"
             android:minHeight="60dp"
             android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:padding="10dp"
             android:background="@color/cardLayout"
-            android:text="Name" />
+            android:hint="Name" />
 
         <EditText
             android:id="@+id/txtCategory"
@@ -46,8 +47,9 @@
             android:minHeight="60dp"
             android:textColor="@color/white"
             android:padding="10dp"
+            android:textColorHint="@color/white"
             android:background="@color/cardLayout"
-            android:text="Category" />
+            android:hint="Category" />
 
         <EditText
             android:id="@+id/txtDescription"
@@ -56,10 +58,11 @@
             android:inputType="text"
             android:layout_marginTop="30dp"
             android:minHeight="60dp"
+            android:textColorHint="@color/white"
             android:textColor="@color/white"
             android:padding="10dp"
             android:background="@color/cardLayout"
-            android:text="Description" />
+            android:hint="Description" />
 
         <EditText
             android:id="@+id/txtCalification"
@@ -69,9 +72,10 @@
             android:layout_marginTop="30dp"
             android:minHeight="60dp"
             android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:padding="10dp"
             android:background="@color/cardLayout"
-            android:text="Calification" />
+            android:hint="Calification" />
 
         <Button
             android:id="@+id/btnSubmit"
