@@ -13,7 +13,7 @@ class MovieViewModel (private val repository: MovieRepository):ViewModel(){
     fun getMovies() = repository.getMovies()
 
     fun addMovies(movie: MovieModel) = repository.addMovies(movie)
-
+/*
     companion object{
         val Factory = viewModelFactory {
             initializer {
@@ -21,6 +21,12 @@ class MovieViewModel (private val repository: MovieRepository):ViewModel(){
                 MovieViewModel(app.movieRepository)
             }
         }
-    }
+    }*/
 
+}
+
+class MovieViewModelFactory(private val repository: MovieRepository): ViewModelProvider.Factory{
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return  MovieViewModel(repository) as T
+    }
 }

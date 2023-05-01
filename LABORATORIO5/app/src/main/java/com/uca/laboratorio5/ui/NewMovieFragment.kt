@@ -14,8 +14,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.uca.laboratorio5.MovieReviewerApplication
 import com.uca.laboratorio5.R
 import com.uca.laboratorio5.data.model.MovieModel
+import com.uca.laboratorio5.data.model.movies
+import com.uca.laboratorio5.repositories.MovieRepository
 
 /**
  * A simple [Fragment] subclass.
@@ -35,7 +38,7 @@ class newMovieFragment : Fragment() {
     private lateinit var txtCalification: EditText
     private lateinit var actionBtn: Button
 
-    private val viewModel: MovieViewModel by viewModels()
+    private val viewModel: MovieViewModel by viewModels{MovieViewModelFactory(MovieRepository(movies))}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
