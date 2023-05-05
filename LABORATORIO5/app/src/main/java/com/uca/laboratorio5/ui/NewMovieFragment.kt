@@ -1,6 +1,5 @@
 package com.uca.laboratorio5.ui
 
-import android.graphics.Movie
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,15 +9,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.uca.laboratorio5.MovieReviewerApplication
+import androidx.navigation.fragment.findNavController
 import com.uca.laboratorio5.R
 import com.uca.laboratorio5.data.model.MovieModel
-import com.uca.laboratorio5.data.model.movies
-import com.uca.laboratorio5.repositories.MovieRepository
+import com.uca.laboratorio5.databinding.FragmentNewMovieBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -31,14 +27,17 @@ private const val ARG_PARAM2 = "param2"
 class newMovieFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
-    private var param2: String? = null
+    private var param2: String? = null/*
     private lateinit var txtName: EditText
     private lateinit var txtCategory: EditText
     private lateinit var txtDescription: EditText
     private lateinit var txtCalification: EditText
-    private lateinit var actionBtn: Button
+    private lateinit var actionBtn: Button*/
+    private lateinit var binding:FragmentNewMovieBinding
 
-    private val viewModel: MovieViewModel by viewModels{MovieViewModelFactory(MovieRepository(movies))}
+    private val viewModel: MovieViewModel by activityViewModels {
+        MovieViewModel.Factory
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -51,12 +50,15 @@ class newMovieFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_movie, container, false)
+        binding = FragmentNewMovieBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setViewModel()
+        observeStatus()
+        /*
         txtName = view.findViewById(R.id.txtName);
         txtCategory = view.findViewById(R.id.txtCategory);
         txtDescription = view.findViewById(R.id.txtDescription);
@@ -75,15 +77,40 @@ class newMovieFragment : Fragment() {
                     MovieModel(
                         txtName.text.toString(),
                         txtCategory.text.toString(),
-                        txtDescription.toString(),
-                        txtCalification.toString()
+                        txtDescription.text.toString(),
+                        txtCalification.text.toString()
                     )
                 )
-                it.findNavController().navigate(R.id.action_newFragment_to_firtFargment)
+                Log.println(Log.INFO,"Nombre",txtName.text.toString())
+                Log.println(Log.INFO,"Peliculas",viewModel.getMovies().toString())
+                //it.findNavController().navigate(R.id.action_newFragment_to_firtFargment)
 
             }catch (error:Exception){
                 Log.println(Log.ERROR,"Errpr",error.toString())
                 Toast.makeText(context,error.toString(),Toast.LENGTH_SHORT).show()
+            }
+        }*/
+    }
+
+    private fun setViewModel(){
+        binding.viewmodel = viewModel
+    }
+
+    private fun observeStatus(){
+        viewModel.status.observe(viewLifecycleOwner){
+            status ->
+            when{
+                status.equals(MovieViewModel.WRONG_INFORMATION) ->{
+                    Log.d("LOG", status)
+                    viewModel.clearStatus()
+                }
+                status.equals(MovieViewModel.MOVIE_CREATED) ->{
+                    Log.d("STATUS", status)
+                    Log.d("PELICULAS", viewModel.getMovies().toString())
+
+                    viewModel.clearStatus()
+                    findNavController().popBackStack()
+                }
             }
         }
     }
