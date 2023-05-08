@@ -58,38 +58,6 @@ class newMovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setViewModel()
         observeStatus()
-        /*
-        txtName = view.findViewById(R.id.txtName);
-        txtCategory = view.findViewById(R.id.txtCategory);
-        txtDescription = view.findViewById(R.id.txtDescription);
-        txtCalification = view.findViewById(R.id.txtCalification);
-        actionBtn = view.findViewById(R.id.btnSubmit)
-
-        actionBtn.setOnClickListener {
-            try {
-                if(txtName.text.toString().isNullOrBlank() ||
-                    txtCategory.text.toString().isNullOrBlank() ||
-                    txtDescription.text.toString().isNullOrBlank() ||
-                    txtCalification.text.toString().isNullOrBlank()){
-                    Toast.makeText(context,"Llene todos los campos!",Toast.LENGTH_SHORT).show()
-                }
-                viewModel.addMovies(
-                    MovieModel(
-                        txtName.text.toString(),
-                        txtCategory.text.toString(),
-                        txtDescription.text.toString(),
-                        txtCalification.text.toString()
-                    )
-                )
-                Log.println(Log.INFO,"Nombre",txtName.text.toString())
-                Log.println(Log.INFO,"Peliculas",viewModel.getMovies().toString())
-                //it.findNavController().navigate(R.id.action_newFragment_to_firtFargment)
-
-            }catch (error:Exception){
-                Log.println(Log.ERROR,"Errpr",error.toString())
-                Toast.makeText(context,error.toString(),Toast.LENGTH_SHORT).show()
-            }
-        }*/
     }
 
     private fun setViewModel(){

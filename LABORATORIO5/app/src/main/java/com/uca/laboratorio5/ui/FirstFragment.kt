@@ -37,6 +37,7 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setViewModel()
         setRecyclerView(view)
 
         binding.actionButton.setOnClickListener {
@@ -44,6 +45,9 @@ class FirstFragment : Fragment() {
         }
     }
 
+    private fun setViewModel(){
+        binding.viewmodel = viewModel
+    }
     private fun showSelectedItem(movie: MovieModel){
         viewModel.setSelectedMovie(movie)
         findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
@@ -57,15 +61,14 @@ class FirstFragment : Fragment() {
 
     private fun setRecyclerView(view: View){
 
+        binding.recyclerView.layoutManager = LinearLayoutManager(view.context)
+
         adapter = MovieRecyclerViewAdapter {
                 selectedMovie ->
             showSelectedItem(selectedMovie)
         }
 
-        binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = adapter
-        }
+        binding.recyclerView.adapter = adapter
 
         displayMovies()
     }
