@@ -1,6 +1,7 @@
 package com.uca.laboratorio5.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,16 +31,15 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false)
+        binding = FragmentFirstBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setRecyclerView(view)
-        actionBtn = view.findViewById(R.id.actionButton)
 
-        actionBtn.setOnClickListener {
+        binding.actionButton.setOnClickListener {
             it.findNavController().navigate(R.id.action_firstFragment_to_newFragment)
         }
     }
@@ -50,19 +50,23 @@ class FirstFragment : Fragment() {
     }
 
     private fun displayMovies(){
+        Log.d("USERS -> ",viewModel.getMovies().toString())
         adapter.setData(viewModel.getMovies())
         adapter.notifyDataSetChanged()
     }
 
     private fun setRecyclerView(view: View){
-        binding.recyclerView.layoutManager = LinearLayoutManager(view.context)
 
         adapter = MovieRecyclerViewAdapter {
-            selectedMovie ->
+                selectedMovie ->
             showSelectedItem(selectedMovie)
         }
 
-        binding.recyclerView.adapter = adapter
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = adapter
+        }
+
         displayMovies()
     }
 }

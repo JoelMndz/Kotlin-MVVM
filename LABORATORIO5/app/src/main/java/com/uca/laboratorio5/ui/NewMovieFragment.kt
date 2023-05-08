@@ -50,7 +50,7 @@ class newMovieFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentNewMovieBinding.inflate(inflater)
+        binding = FragmentNewMovieBinding.inflate(inflater,container,false)
         return binding.root
     }
 
